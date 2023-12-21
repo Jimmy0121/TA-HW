@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+</head>
+<body>
+    <script>
+        // Function to perform addition
+        function add(x, y) {
+            return x + y;
+        }
+
+        // Function to perform subtraction
+        function subtract(x, y) {
+            return x - y;
+        }
+
+        // Function to perform multiplication
+        function multiply(x, y) {
+            return x * y;
+        }
+
+        // Function to perform division
+        function divide(x, y) {
+            return x / y;
+        }
+
+        // Function to get user input for numbers and operation
+        function getUserInput() {
+            let num1, num2, operation;
+
+            // Get the first number
+            while (isNaN(num1)) {
+                num1 = parseFloat(prompt("Enter the first number:"));
+                if (isNaN(num1)) {
+                    alert("Please enter a valid number.");
+                }
+            }
+
+            // Get the second number
+            while (isNaN(num2)) {
+                num2 = parseFloat(prompt("Enter the second number:"));
+                if (isNaN(num2)) {
+                    alert("Please enter a valid number.");
+                }
+            }
+
+            // Get the operation
+            while (true) {
+                operation = prompt("Choose an operation (+, -, *, /):");
+                if (['+', '-', '*', '/'].includes(operation)) {
+                    break;
+                } else {
+                    alert("Please enter a valid operation.");
+                }
+            }
+
+            return { num1, num2, operation };
+        }
+
+        // Main loop for the calculator
+        while (true) {
+            // Get user input
+            let userInput = getUserInput();
+
+            // Perform the selected operation
+            let result;
+            switch (userInput.operation) {
+                case '+':
+                    result = add(userInput.num1, userInput.num2);
+                    break;
+                case '-':
+                    result = subtract(userInput.num1, userInput.num2);
+                    break;
+                case '*':
+                    result = multiply(userInput.num1, userInput.num2);
+                    break;
+                case '/':
+                    if (userInput.num2 !== 0) {
+                        result = divide(userInput.num1, userInput.num2);
+                    } else {
+                        alert("Cannot divide by zero. Please enter a non-zero divisor.");
+                        continue; // Restart the loop
+                    }
+                    break;
+            }
+
+            // Display the result
+            alert(`Result: ${result}`);
+
+            // Ask if the user wants to perform another calculation
+            let continueCalculation = prompt("Do you want to perform another calculation? (yes/no)").toLowerCase();
+
+            if (continueCalculation == 'no') {
+                alert("Calculator closed.");
+                break; // Exit the loop
+            }
+        }
+    </script>
+</body>
+</html>
